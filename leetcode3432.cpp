@@ -1,0 +1,66 @@
+#include <iostream>
+#include <vector>
+#include <numeric>
+using namespace std;
+
+/*Leetcode - 3432 : Count Partitions with Even Sum difference
+You are given an integer array nums of length n.
+
+A partition is defined as an index i where 0 <= i < n - 1, splitting the array into two non-empty subarrays such that:
+
+Left subarray contains indices [0, i].
+Right subarray contains indices [i + 1, n - 1].
+Return the number of partitions where the difference between the sum of the left and right subarrays is even.
+
+Example 1:
+Input: nums = [10,10,3,7,6]
+Output: 4
+Explanation:
+The 4 partitions are:
+[10], [10, 3, 7, 6] with a sum difference of 10 - 26 = -16, which is even.
+[10, 10], [3, 7, 6] with a sum difference of 20 - 16 = 4, which is even.
+[10, 10, 3], [7, 6] with a sum difference of 23 - 13 = 10, which is even.
+[10, 10, 3, 7], [6] with a sum difference of 30 - 6 = 24, which is even.
+
+Example 2:
+Input: nums = [1,2,2]
+Output: 0
+Explanation:
+No partition results in an even sum difference.
+*/
+class Solution {
+public:
+    int countPartitions(vector<int>& nums) {
+        int count = 0;
+        int totalSum = 0;
+        
+        //Finding sum of all element in array
+        // for(int i = 0; i<nums.size(); i++){
+        //     totalSum += nums[i];
+        // }
+        totalSum = accumulate(begin(nums), end(nums),0);
+
+        int leftSum = 0;
+
+        for(int i = 0; i<nums.size()-1; i++){
+            leftSum += nums[i];
+            int rightSum = totalSum - leftSum;
+
+            if((leftSum - rightSum) % 2 == 0){
+                count++;
+            }
+        }
+        return count;
+    }
+};
+
+int main() {
+    vector<int> nums = {10,10,3,7,6};
+
+    Solution sol;
+    int ans = sol.countPartitions(nums);
+
+    cout << "No. of Partitions = " << ans;
+
+    return 0;
+}

@@ -1,0 +1,15 @@
+# Compiled C++ files
+*.exe
+*.o
+*.out
+
+# VS Code settings
+.vscode/
+
+# Temporary files
+*.tmp
+*.log
+
+# OS generated files
+.DS_Store
+Thumbs.db
